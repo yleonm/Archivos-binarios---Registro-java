@@ -1,4 +1,4 @@
-// esto es un comentario desde github
+// esto es un comentario desde github nuevo
 package ventanas;
 
 import java.io.Serializable;
