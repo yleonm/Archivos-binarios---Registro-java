@@ -5,6 +5,12 @@
  */
 package ventanas;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author H.P
@@ -37,7 +43,7 @@ public class Ventana_principal extends javax.swing.JFrame {
         caja_peso = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         caja_estatura = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Boton_registrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mostrar_atleta = new javax.swing.JMenuItem();
@@ -76,7 +82,12 @@ public class Ventana_principal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel5.setText("Estatura (cm):");
 
-        jButton1.setText("Registrar atleta");
+        Boton_registrar.setText("Registrar atleta");
+        Boton_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_registrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,7 +111,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                             .addComponent(caja_estatura)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(305, 305, 305)
-                        .addComponent(jButton1)))
+                        .addComponent(Boton_registrar)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,7 +135,7 @@ public class Ventana_principal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(caja_estatura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
-                .addComponent(jButton1)
+                .addComponent(Boton_registrar)
                 .addGap(0, 106, Short.MAX_VALUE))
         );
 
@@ -177,9 +188,46 @@ public class Ventana_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_caja_pesoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void Boton_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_registrarActionPerformed
+        String nombre;
+        int edad;
+        double peso;
+        int estatura;
+        
+        nombre = caja_nombre.getText();
+        edad = Integer.parseInt(caja_edad.getText());
+        peso = Double.parseDouble(caja_peso.getText());
+        estatura = Integer.parseInt(caja_estatura.getText());
+        
+        Clase_atleta atleta = new Clase_atleta(nombre, edad, peso, estatura);
+        
+        escribir_binario(atleta);
+        
+        caja_nombre.setText("");
+        caja_edad.setText("");
+        caja_peso.setText("");
+        caja_estatura.setText("");
+        
+    }//GEN-LAST:event_Boton_registrarActionPerformed
+
+    public void escribir_binario(Clase_atleta atleta){
+        try {
+            FileOutputStream archivo = new FileOutputStream("Registro_atletas.bin",true);
+            Añadir_binario escribir = new Añadir_binario(archivo);
+            
+            escribir.writeObject(atleta);
+            escribir.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.err.println("Error, "+ex);
+        } catch (IOException ex) {
+            System.err.println("Error, "+ex);
+        }
+        
+        
+    
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -213,11 +261,11 @@ public class Ventana_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Boton_registrar;
     private javax.swing.JTextField caja_edad;
     private javax.swing.JTextField caja_estatura;
     private javax.swing.JTextField caja_nombre;
     private javax.swing.JTextField caja_peso;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
