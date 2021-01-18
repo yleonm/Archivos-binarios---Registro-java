@@ -1,4 +1,4 @@
-
+// esto es un comentario desde github
 package ventanas;
 
 import java.io.Serializable;
