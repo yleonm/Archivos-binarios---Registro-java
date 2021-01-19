@@ -145,6 +145,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         mostrar_atleta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         mostrar_atleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atleta_reducido.png"))); // NOI18N
         mostrar_atleta.setText("Mostrar atletas registrados");
+        mostrar_atleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrar_atletaActionPerformed(evt);
+            }
+        });
         jMenu1.add(mostrar_atleta);
         jMenu1.add(jSeparator1);
 
@@ -209,6 +214,11 @@ public class Ventana_principal extends javax.swing.JFrame {
         caja_estatura.setText("");
         
     }//GEN-LAST:event_Boton_registrarActionPerformed
+
+    private void mostrar_atletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_atletaActionPerformed
+        Ventana_atletas_registrados venatana_ar = new Ventana_atletas_registrados(this, true);
+        venatana_ar.setVisible(true);
+    }//GEN-LAST:event_mostrar_atletaActionPerformed
 
     public void escribir_binario(Clase_atleta atleta){
         try {
